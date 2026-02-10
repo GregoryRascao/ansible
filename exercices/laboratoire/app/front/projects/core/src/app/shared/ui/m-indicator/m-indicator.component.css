@@ -1,0 +1,51 @@
+@reference 'tailwindcss';
+
+:host {
+  display: block;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.status-indicator {
+  width: var(--p-indicator-size, 15px);
+  height: var(--p-indicator-size, 15px);
+}
+.status-indicator.circle {
+  border-radius: 50%;
+}
+
+.status-indicator.square {
+}
+
+.status-indicator.pulse {
+  animation: pulse var(--p-indicator-pulse-duration,2s) infinite;
+}
+
+.status-indicator.status-indicator-green {
+  background-color: var(--p-indicator-background-green, var(--color-green-500));
+}
+
+.status-indicator.status-indicator-orange {
+  background-color: var(--p-indicator-background-orange,var(--color-orange-500));
+}
+
+.status-indicator.status-indicator-red {
+  background-color: var(--p-indicator-background-red, var(--color-red-500));
+}
+.status-indicator.status-indicator-gray {
+  background-color: var(--p-indicator-background-gray, var(--color-gray-500));
+}
+

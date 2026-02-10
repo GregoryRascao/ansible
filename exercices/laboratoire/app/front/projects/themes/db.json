@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "email": "memoco@test.com",
+      "password": "$2a$10$yowyeytkwMtovW8b33YCou8ylGktofeP1Z19hQOtxbG0KtXQdGeGq",
+      "roles": [
+        "admin"
+      ],
+      "c8y_url": "https://memoco.emea.cumulocity.com",
+      "c8y_token": "dDI2MzAzNzQ1MC9mbGF2aWFuLm92eW5AYnN0b3JtLmJlOjZnZVFjY2l0blJLdDdzc0A=",
+      "id": 1
+    }
+  ]
+}

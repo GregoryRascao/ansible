@@ -1,0 +1,8 @@
+<div class="proportion-bar">
+  @for(item of data(); track item.label) {
+    @if (item.value > 0) {
+      @let prc = (item.value / total() * 100)+ '%';
+      <div class="proportion-bar-item text-center" [style.width]="prc" [style.background-color]="item.color">{{ prc }} - {{ item.label }}</div>
+    }
+  }
+</div>

@@ -1,0 +1,13 @@
+@reference "tailwindcss";
+
+:host {
+  --core-menu-links-justify: var(--p-core-menu-links-justify, start);
+}
+
+:host .vMenu {
+  @apply flex flex-col gap-3;
+}
+:host .hMenu {
+  @apply flex flex-row gap-3;
+  justify-content: var(--core-menu-links-justify);
+}

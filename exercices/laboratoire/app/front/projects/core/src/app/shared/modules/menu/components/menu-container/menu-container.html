@@ -1,0 +1,43 @@
+@let startTemplate = startTemplateRef();
+@let centerTemplate = centerTemplateRef();
+@let endTemplate = endTemplateRef();
+
+@let currentPosition = position();
+
+@if (['left', 'right'].includes(currentPosition)) {
+  <div class="core-menu core-menu-vertical" [class.isToggleable]="menuToggleable()">
+    <div class="core-menu-start">
+      @if (startTemplate) {
+        <ng-container [ngTemplateOutlet]="startTemplate"/>
+      }
+    </div>
+    <div class="core-menu-center">
+      @if (centerTemplate) {
+        <ng-container *ngTemplateOutlet="centerTemplate"/>
+      }
+    </div>
+    <div class="core-menu-end">
+      @if (endTemplate) {
+        <ng-container *ngTemplateOutlet="endTemplate"/>
+      }
+    </div>
+  </div>
+} @else if (['top', 'bottom'].includes(currentPosition)) {
+  <div class="core-menu core-menu-horizontal" [class.isToggleable]="menuToggleable()">
+    <div class="core-menu-start">
+      @if (startTemplate) {
+        <ng-container *ngTemplateOutlet="startTemplate"/>
+      }
+    </div>
+    <div class="core-menu-center">
+      @if (centerTemplate) {
+        <ng-container *ngTemplateOutlet="centerTemplate"/>
+      }
+    </div>
+    <div class="core-menu-end">
+      @if (endTemplate) {
+        <ng-container *ngTemplateOutlet="endTemplate"/>
+      }
+    </div>
+  </div>
+}

@@ -1,0 +1,80 @@
+@reference 'tailwindcss';
+
+:host {
+  --core-menu-container-background-color: var(--p-core-menu-container-background-color);
+  --core-menu-container-box-shadow: var(--p-core-menu-container-box-shadow);
+  --core-menu-container-padding: var(--p-core-menu-container-padding);
+  --core-menu-container-margin: var(--p-core-menu-container-margin);
+
+  --core-menu-vertical-height: var(--p-core-menu-vertical-height);
+  --core-menu-vertical-width: var(--p-core-menu-vertical-width);
+  --core-menu-vertical-page-width: calc(100% - var(--core-menu-vertical-width));
+
+  --core-menu-horizontal-height: var(--p-core-menu-horizontal-height, 5vh);
+  --core-menu-horizontal-width: var(--p-core-menu-horizontal-width, 100%);
+  --core-menu-horizontal-page-height: calc(100vh - var(--core-menu-horizontal-height));
+
+  --core-menu-font-size: 2rem;
+  --core-menu-font-weight: 400;
+
+  --core-menu-start-justify: var(--p-core-menu-start-justify);
+  --core-menu-start-align: var(--p-core-menu-start-align);
+  --core-menu-start-gap: var(--p-core-menu-start-gap, 0);
+
+  --core-menu-center-justify: var(--p-core-menu-center-justify, center);
+  --core-menu-center-align: var(--p-core-menu-center-align, center);
+  --core-menu-center-gap: var(--p-core-menu-center-gap, 0);
+
+  --core-menu-end-justify: var(--p-core-menu-end-justify, end);
+  --core-menu-end-align: var(--p-core-menu-end-align, center);
+  --core-menu-end-gap: var(--p-core-menu-end-gap, 0);
+}
+
+:host .vMenuPanel {
+  height: var(--core-menu-vertical-height);
+}
+
+:host .vMenuPanel.isToggleable {
+  width: 100%
+}
+
+:host .core-menu {
+  @apply flex gap-3;
+  background-color: var(--core-menu-container-background-color);
+  box-shadow: var(--core-menu-container-box-shadow);
+  padding: var(--core-menu-container-padding);
+  margin: var(--core-menu-container-margin);
+}
+:host .core-menu.isToggleable {
+  color: black;
+  background-color: transparent;
+}
+:host .core-menu-vertical {
+  @apply flex flex-col justify-between gap-3 shadow;
+  height: var(--core-menu-vertical-height);
+  max-height: var(--core-menu-vertical-height);
+}
+
+:host .core-menu-horizontal {
+  @apply flex flex-row gap-3 shadow;
+  height: var(--core-menu-horizontal-height);
+  max-height: var(--core-menu-horizontal-height);
+  width: var(--core-menu-horizontal-width);
+  max-width: var(--core-menu-horizontal-width);
+}
+
+:host .core-menu-start {
+  flex-grow: 1;
+  gap: calc(var(--spacing) * var(--core-menu-start-gap));
+  align-content: var(--core-menu-start-align);
+}
+:host .core-menu-center {
+  flex-grow: 1;
+  gap: var(--core-menu-center-gap);
+  align-content: var(--core-menu-center-align);
+}
+:host .core-menu-end {
+  flex-grow: 1;
+  gap: var(--core-menu-end-gap);
+  align-content: var(--core-menu-end-align);
+}

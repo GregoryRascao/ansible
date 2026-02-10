@@ -1,0 +1,9 @@
+:host(.ng-invalid) input,
+:host(.ng-invalid) .p-inputtext,
+:host(.ng-invalid) .p-inputtextarea,
+:host(.ng-invalid) .p-select {
+  border-color: red;
+}
+small.p-error {
+  color: red;
+}

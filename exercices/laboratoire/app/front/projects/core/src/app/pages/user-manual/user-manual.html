@@ -1,0 +1,217 @@
+<p-scroll-panel [style]="{height: 'calc(100vh)'}">
+  <!--  <div class="manual-container">-->
+  <!--    <section>-->
+  <!--      <h3>Bienvenue dans l'application</h3>-->
+  <!--      <p>Cette documentation vous guidera à travers les principales fonctionnalités de l'application.</p>-->
+  <!--    </section>-->
+
+  <!--    <section>-->
+  <!--      <h3>Gestion des Workflows</h3>-->
+  <!--      <p>Le menu "Workflow" vous permet de gérer vos flux de travail. L'interface est organisée par dossiers.</p>-->
+  <!--      <ul>-->
+  <!--        <li><strong>Recherche :</strong> Utilisez la barre de recherche pour filtrer les workflows par nom, statut ou-->
+  <!--          dossier.-->
+  <!--        </li>-->
+  <!--        <li><strong>Statuts :</strong> Les icônes indiquent le dernier état d'exécution (Succès, Erreur ou Timeout).-->
+  <!--        </li>-->
+  <!--        <li><strong>Réorganisation :</strong> Vous pouvez glisser-déposer les lignes pour changer l'ordre des workflows-->
+  <!--          au sein d'un même dossier.-->
+  <!--        </li>-->
+  <!--        <li><strong>Détails :</strong> Cliquez sur le badge d'un workflow pour voir le détail des jobs associés.</li>-->
+  <!--      </ul>-->
+  <!--      <div class="image-placeholder">-->
+  <!--        <p-image src="/imgs/documentation/workflow-list.png" alt="Liste des workflows" width="600"-->
+  <!--                 [preview]="true"></p-image>-->
+  <!--      </div>-->
+  <!--    </section>-->
+
+  <!--    <section>-->
+  <!--      <h3>Suivi des Jobs</h3>-->
+  <!--      <p>Le menu "Job" affiche l'historique des exécutions sous forme de cartes.</p>-->
+  <!--      <ul>-->
+  <!--        <li><strong>Filtres temporels :</strong> Sélectionnez une plage de dates pour consulter l'historique.</li>-->
+  <!--        <li><strong>Acquittement :</strong> Vous pouvez acquitter les erreurs individuellement ou globalement via le-->
+  <!--          bouton "Tout acquitter".-->
+  <!--        </li>-->
+  <!--        <li><strong>Détails techniques :</strong> Cliquez sur une carte de job pour ouvrir la fenêtre des étapes-->
+  <!--          détaillées (Job Steps).-->
+  <!--        </li>-->
+  <!--        <li><strong>Code couleur :</strong> Les cartes vertes indiquent un succès, les rouges une erreur.</li>-->
+  <!--      </ul>-->
+  <!--      <div class="image-placeholder">-->
+  <!--        <p-image src="/imgs/documentation/job-history.png" alt="Historique des jobs" width="600"-->
+  <!--                 [preview]="true"></p-image>-->
+  <!--      </div>-->
+  <!--    </section>-->
+
+  <!--    <section>-->
+  <!--      <h3>Édition de Workflow</h3>-->
+  <!--      <p>L'édition d'un workflow se fait via un assistant (stepper) en plusieurs étapes :</p>-->
+  <!--      <ol>-->
+  <!--        <li><strong>Métadonnées :</strong> Configuration générale (nom, dossier, description, planification CRON).</li>-->
+  <!--        <li><strong>Source :</strong> Définition de l'origine des données (ex: Elastic Search, API, Database).</li>-->
+  <!--        <li><strong>Transformation :</strong> Étapes de traitement et de modification des données.</li>-->
+  <!--        <li><strong>Destination :</strong> Où les données traitées seront envoyées.</li>-->
+  <!--        <li><strong>Résumé :</strong> Vue d'ensemble de la configuration avant sauvegarde.</li>-->
+  <!--      </ol>-->
+
+  <!--      <h4>Formulaires des Plugins</h4>-->
+  <!--      <p>Chaque étape (Source, Transform, Destination) utilise des plugins avec des formulaires spécifiques :</p>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Sources de données (Plugins Source)</h5>-->
+  <!--        <p>Les plugins suivants permettent de récupérer des données de diverses sources :</p>-->
+  <!--        <ul>-->
+  <!--          <li><strong>Elastic Search Source :</strong> Récupération depuis un cluster Elastic Search (Uri, Method,-->
+  <!--            Authentification, Select, From, Join).-->
+  <!--          </li>-->
+  <!--          <li><strong>API Source / HTTP Source :</strong> Appel d'APIs REST via des requêtes HTTP. Configurez l'Uri, la-->
+  <!--            méthode (GET, POST, etc.) et les paramètres de sélection.-->
+  <!--          </li>-->
+  <!--          <li><strong>SQL Source :</strong> Connexion à une base de données relationnelle. Requiert la chaîne de-->
+  <!--            connexion (Uri), le driver et les identifiants.-->
+  <!--          </li>-->
+  <!--          <li><strong>Excel Source :</strong> Lecture de fichiers Excel. Permet de spécifier la feuille et les plages de-->
+  <!--            données.-->
+  <!--          </li>-->
+  <!--          <li><strong>Mongo Source :</strong> Récupération de documents depuis une collection MongoDB.</li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Transformations (Plugins Transform)</h5>-->
+  <!--        <p>Ces plugins modifient ou filtrent les données en cours de traitement :</p>-->
+  <!--        <ul>-->
+  <!--          <li><strong>CSV to JSON :</strong> Conversion de fichiers CSV en format structuré (Séparateurs, En-têtes).-->
+  <!--          </li>-->
+  <!--          <li><strong>Mapping :</strong> Renommage, transformation ou création de nouveaux champs à partir des données-->
+  <!--            existantes.-->
+  <!--          </li>-->
+  <!--          <li><strong>Filter :</strong> Exclusion de données selon des conditions logiques définies.</li>-->
+  <!--          <li><strong>Script :</strong> Exécution de scripts personnalisés pour des transformations complexes.</li>-->
+  <!--          <li><strong>Distinct / Sort / Limit :</strong> Opérations de dédoublonnage, de tri et de limitation du nombre-->
+  <!--            d'enregistrements.-->
+  <!--          </li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Destinations (Plugins Destination)</h5>-->
+  <!--        <p>Définissez où envoyer les données après traitement :</p>-->
+  <!--        <ul>-->
+  <!--          <li><strong>SFTP Destination :</strong> Envoi de fichiers vers un serveur distant via le protocole SFTP.</li>-->
+  <!--          <li><strong>Elastic Search Destination :</strong> Indexation des données dans Elastic Search.</li>-->
+  <!--          <li><strong>SQL Destination :</strong> Insertion ou mise à jour de données dans une table SQL.</li>-->
+  <!--          <li><strong>Mongo Destination :</strong> Stockage des résultats dans une base MongoDB.</li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+  <!--    </section>-->
+
+  <!--    <section>-->
+  <!--      <h3>Utilisation de JSONPath</h3>-->
+  <!--      <p>Certains plugins utilisent des expressions <strong>JSONPath</strong> pour extraire ou manipuler des données au-->
+  <!--        sein de structures JSON complexes.</p>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Plugins utilisant JSONPath</h5>-->
+  <!--        <ul>-->
+  <!--          <li><strong>Mapping (Json2Json) :</strong> Utilise JSONPath pour extraire les valeurs sources lors de la-->
+  <!--            transformation.-->
+  <!--          </li>-->
+  <!--          <li><strong>Unwind (Json Unwind) :</strong> Utilise JSONPath pour cibler le tableau à "dérouler".</li>-->
+  <!--          <li><strong>Group (Json Group) :</strong> Utilise JSONPath pour définir les clés de regroupement.</li>-->
+  <!--          <li><strong>Object to Array :</strong> Utilise JSONPath pour transformer des objets en tableaux.</li>-->
+  <!--          <li><strong>Group to CSV :</strong> Peut utiliser JSONPath pour générer dynamiquement des noms de fichiers.-->
+  <!--          </li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Syntaxe de base</h5>-->
+  <!--        <ul>-->
+  <!--          <li><code>$</code> : Représente l'objet ou l'élément racine.</li>-->
+  <!--          <li><code>.</code> ou <code>[]</code> : Permet de descendre dans la hiérarchie (ex: <code>$.nom</code> ou-->
+  <!--            <code>$['nom']</code>).-->
+  <!--          </li>-->
+  <!--          <li><code>*</code> : Joker pour tous les éléments d'un objet ou d'un tableau.</li>-->
+  <!--          <li><code>[n]</code> : Accède au n-ième élément d'un tableau (commence à 0).</li>-->
+  <!--          <li><code>[?(@.propriete == 'valeur')]</code> : Filtre les éléments selon une condition.</li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Exemples concrets</h5>-->
+  <!--        <p>Si votre donnée source ressemble à ceci :</p>-->
+  <!--        <pre><code>-->
+  <!--{{ '{' }}-->
+  <!--          "client": {{ '{' }}-->
+  <!--          "nom": "Dupont",-->
+  <!--    "commandes": [-->
+  <!--          {{ '{' }}"id": 1, "total": 50{{ '}' }},-->
+  <!--          {{ '{' }}"id": 2, "total": 120{{ '}' }}-->
+  <!--          ]-->
+  <!--          {{ '}' }}-->
+  <!--          {{ '}' }}-->
+  <!--        </code></pre>-->
+  <!--        <ul>-->
+  <!--          <li><code>$.client.nom</code> retournera <code>"Dupont"</code>.</li>-->
+  <!--          <li><code>$.client.commandes[*].total</code> retournera la liste des totaux <code>[50, 120]</code>.</li>-->
+  <!--          <li><code>$.client.commandes[0]</code> retournera la première commande.</li>-->
+  <!--        </ul>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Fonctions avancées</h5>-->
+  <!--        <p>En plus de la syntaxe standard, vous pouvez exécuter des fonctions directement dans vos expressions JSONPath-->
+  <!--          pour transformer les données extraites :</p>-->
+  <!--        <ul>-->
+  <!--          <li><strong>Agrégations :</strong>-->
+  <!--            <ul>-->
+  <!--              <li><code>$.commandes[*].total.sum()</code> : Calcule la somme des totaux.</li>-->
+  <!--              <li><code>$.commandes[*].total.avg()</code> : Calcule la moyenne des totaux.</li>-->
+  <!--              <li><code>$.commandes[*].total.min()</code> / <code>.max()</code> : Trouve la valeur minimale ou maximale.-->
+  <!--              </li>-->
+  <!--            </ul>-->
+  <!--          </li>-->
+  <!--          <li><strong>Utilitaires :</strong>-->
+  <!--            <ul>-->
+  <!--              <li><code>$.commandes.length()</code> : Retourne le nombre d'éléments dans le tableau.</li>-->
+  <!--            </ul>-->
+  <!--          </li>-->
+  <!--        </ul>-->
+  <!--        <p>Ces fonctions sont particulièrement utiles dans les plugins de <strong>Mapping</strong> pour consolider des-->
+  <!--          données avant l'envoi vers une destination.</p>-->
+  <!--      </div>-->
+
+  <!--      <div class="plugin-doc">-->
+  <!--        <h5>Expressions JavaScript (Arrow Functions)</h5>-->
+  <!--        <p>Pour les cas de transformation plus complexes ou critiques, vous pouvez utiliser une syntaxe de fonction-->
+  <!--          fléchée JavaScript. L'objet courant est accessible via la variable <code>it</code>.</p>-->
+  <!--        <ul>-->
+  <!--          <li><strong>Syntaxe :</strong> <code>(it) => expression</code></li>-->
+  <!--          <li><strong>Exemples :</strong>-->
+  <!--            <ul>-->
+  <!--              <li><code>(it) => it.name + ' ' + it.lastDate.toJson()</code> : Concatène le nom et la date formatée.</li>-->
+  <!--              <li><code>(it) => it.prix * 1.21</code> : Calcule un prix TTC directement.</li>-->
+  <!--              <li><code>(it) => it.statut.toUpperCase()</code> : Met le statut en majuscules.</li>-->
+  <!--            </ul>-->
+  <!--          </li>-->
+  <!--        </ul>-->
+  <!--        <p>Cette notation offre une flexibilité totale pour manipuler les données en utilisant toute la puissance de-->
+  <!--          JavaScript.</p>-->
+  <!--      </div>-->
+  <!--    </section>-->
+  <!--  </div>-->
+  <h1>{{ 'manual.tableOfContents' |translate }}</h1>
+  @for (group of tableOfContents(); track group.key) {
+    <section>
+      <h3>{{ group.key }}</h3>
+      <ul>
+        @for (item of group.values; track item.plugin) {
+          <li (click)="openDialog(item)">{{ item.plugin }}</li>
+        }
+      </ul>
+    </section>
+  }
+</p-scroll-panel>
+<p-dialog [appendTo]="document"></p-dialog>

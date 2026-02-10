@@ -1,0 +1,49 @@
+@let field = fieldDef();
+
+@if (field.formType === 'input') {
+  @if (field.inputType === 'hidden') {
+    <input type="hidden" [(ngModel)]="value"/>
+  } @else {
+    <p-floatlabel variant="on" class="w-full">
+      @if (field.inputType == 'number') {
+        <p-inputNumber [(ngModel)]="value" class="w-full" [inputId]="'input-'+ field.label" [showButtons]="true" fluid/>
+        <label [for]="'input-'+ field.label">{{ field.label }} @if (!field.optional) {
+          *
+        }</label>
+      } @else if (field.inputType == 'date' || field.inputType == 'datetime-local') {
+        <p-datePicker [(ngModel)]="value" class="w-full"/>
+        <label [for]="'input-'+ field.label">{{ field.label }} @if (!field.optional) {
+          *
+        }</label>
+      } @else {
+        <label [for]="'input-'+ field.label">{{ field.label }} @if (!field.optional) {
+          *
+        }</label>
+        <input pInputText [type]="field.inputType" [(ngModel)]="value" class="w-full"/>
+      }
+    </p-floatlabel>
+  }
+} @else if (field.formType === 'checkbox') {
+  <div class="flex items-center">
+    <p-checkbox [inputId]="field.name" [(ngModel)]="value" [binary]="true" (onChange)="onChange($event.checked)"/>
+    <label [for]="field.name">{{ field.label }}</label>
+  </div>
+} @else if (field.formType === 'select') {
+  <p-select [(ngModel)]="value" [options]="field.selectValues" optionLabel="label" optionValue="value"
+            (onChange)="onChange($event.value)" [placeholder]="`${field.label} ${!field.optional ? '*': ''}`" fluid/>
+} @else if (field.formType === 'textarea') {
+  <p-floatlabel variant="on">
+    <label>{{ field.label }} @if (!field.optional) {
+      *
+    }</label>
+    <textarea pTextarea rows="5" cols="30" [(ngModel)]="value" [invalid]="control().invalid" fluid
+              [autoResize]="true"></textarea>
+  </p-floatlabel>
+}
+
+@if (showError()) {
+  @for (error of errorMessages(); track error) {
+    <p-message severity="error" icon="pi pi-exclamation-triangle" variant="simple" size="small">{{ error }}
+    </p-message>
+  }
+}

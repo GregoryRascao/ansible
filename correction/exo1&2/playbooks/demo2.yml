@@ -1,0 +1,56 @@
+---
+- name: Installation et configuration Nginx
+  hosts: vms
+  become: yes
+  gather_facts: yes
+  
+  vars:
+    nginx_port: 80
+    server_name: example.com
+    document_root: /var/www/html
+    
+  tasks:
+    - name: Installer Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      
+    - name: Créer le répertoire du site
+      file:
+        path: "{{ document_root }}"
+        state: directory
+        owner: www-data
+        group: www-data
+        mode: '0755'
+    
+    - name: Copier la configuration Nginx
+      copy:
+        content: |
+          server {
+            listen {{ nginx_port }};
+            server_name {{ server_name }};
+            root {{ document_root }};
+            index index.html;
+          }
+        dest: /etc/nginx/sites-available/default
+        backup: yes
+      notify: Recharger Nginx
+    
+    - name: Copier la page d'accueil
+      copy:
+        content: "<h1>Hello world sur {{ server_name }}"
+        dest: "{{ document_root }}/index.html"
+        owner: www-data 
+        group: www-data
+        mode: '0644'
+    - name: Démarrer et activer Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+  handlers:
+    - name: Recharger Nginx
+      service:
+        name: nginx
+        state: reloaded

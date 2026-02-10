@@ -1,0 +1,99 @@
+variables:
+  DOCKER_DRIVER: overlay2
+  BASE_IMAGE: $CI_REGISTRY_IMAGE
+  # CI Optimization
+  FF_USE_FASTZIP: "true"
+  ARTIFACT_COMPRESSION_LEVEL: "fast"
+  CACHE_FALLBACK_TAG: "latest"
+
+stages:
+  - build
+  - deploy
+
+.docker_build_template:
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    # Pull the existing image to use as a cache source.
+    # Ignore failure if the image doesn't exist yet.
+    - |
+      if [ "$CI_COMMIT_BRANCH" == "develop" ]; then
+        CACHE_TAG="development"
+      elif [[ "$CI_COMMIT_BRANCH" =~ ^release/ ]]; then
+        CACHE_TAG="acceptance"
+      elif [ "$CI_COMMIT_BRANCH" == "main" ] || [ -n "$CI_COMMIT_TAG" ]; then
+        CACHE_TAG="production"
+      else
+        CACHE_TAG="latest"
+      fi
+    - docker pull $BASE_IMAGE:$CACHE_TAG || docker pull $BASE_IMAGE:$CACHE_FALLBACK_TAG || true
+
+# ----------------------------------------------------
+# 1. Development Build (develop branch)
+# ----------------------------------------------------
+build_development:
+  extends: .docker_build_template
+  script:
+    - docker build --pull --cache-from $BASE_IMAGE:development --cache-from $BASE_IMAGE:latest --build-arg MODE=development -t $BASE_IMAGE:development .
+    - docker push $BASE_IMAGE:development
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+# ----------------------------------------------------
+# 2. Acceptance/Staging Build (release branches)
+# ----------------------------------------------------
+build_acceptance:
+  extends: .docker_build_template
+  script:
+    - docker build --pull --cache-from $BASE_IMAGE:acceptance --cache-from $BASE_IMAGE:latest --build-arg MODE=acceptance -t $BASE_IMAGE:acceptance .
+    - docker push $BASE_IMAGE:acceptance
+  rules:
+    - if: $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_COMMIT_BRANCH =~ /^release/
+
+# ----------------------------------------------------
+# 3. Production Build (main branch or tags)
+# ----------------------------------------------------
+build_production:
+  extends: .docker_build_template
+  script:
+    - |
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        IMAGE_TAG=$BASE_IMAGE:$CI_COMMIT_TAG
+      else
+        IMAGE_TAG=$BASE_IMAGE:production
+      fi
+    - docker build --pull --cache-from $BASE_IMAGE:production --cache-from $BASE_IMAGE:latest --build-arg MODE=production -t $IMAGE_TAG .
+    - docker push $IMAGE_TAG
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+    - if: $CI_COMMIT_TAG
+
+# ----------------------------------------------------
+# 4. Update Latest Tag (only for main/tags)
+# ----------------------------------------------------
+update_latest_tag:
+  stage: deploy
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - |
+      if [ -n "$CI_COMMIT_TAG" ]; then
+        SOURCE_TAG=$BASE_IMAGE:$CI_COMMIT_TAG
+      else
+        SOURCE_TAG=$BASE_IMAGE:production
+      fi
+    - docker pull $SOURCE_TAG
+    - docker tag $SOURCE_TAG $BASE_IMAGE:latest
+    - docker push $BASE_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+    - if: $CI_COMMIT_TAG
+      when: manual

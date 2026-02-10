@@ -1,0 +1,50 @@
+@reference 'tailwindcss';
+
+:host {
+  --core-menu-link-color: var(--p-core-menu-link-color);
+  --core-menu-link-active: var(--p-core-menu-link-active);
+  --core-menu-link-hover: var(--p-core-menu-link-hover);
+  --core-menu-link-focus: var(--p-core-menu-link-focus);
+  --core-menu-link-disabled: var(--p-core-menu-link-disabled);
+
+  --core-menu-link-font-size: var(--p-core-menu-link-font-size, var(--p-core-menu-font-size));
+  --core-menu-link-icon-size: var(--p-core-menu-link-icon-size, var(--p-core-menu-icon-size));
+
+  --core-menu-link-group-color: var(--p-core-menu-link-group-color);
+  --core-menu-link-group-size: var(--p-core-menu-link-group-size);
+  --core-menu-link-group-weight: var(--p-core-menu-link-group-weight);
+}
+
+:host a {
+  color: var(--core-menu-link-color);
+}
+:host a.active {
+  color: var(--core-menu-link-active);
+}
+:host a:hover {
+  color: var(--core-menu-link-hover);
+}
+:host a:focus {
+  color: var(--core-menu-link-focus);
+}
+:host a:disabled {
+  color: var(--core-menu-link-disabled);
+}
+
+:host .core-menu-link {
+  font-size: var(--core-menu-link-font-size);
+  i.pi {
+    font-size: var(--core-menu-link-icon-size);
+  }
+}
+:host .core-menu-link.vMenu {
+  @apply flex flex-col gap-3;
+}
+:host .core-menu-link.hMenu {
+  @apply flex flex-row gap-3;
+}
+:host .core-menu-link-group {
+  font-size: var(--core-menu-link-group-size);
+  font-weight: var(--core-menu-link-group-weight);
+  color: var(--core-menu-link-group-color);
+}

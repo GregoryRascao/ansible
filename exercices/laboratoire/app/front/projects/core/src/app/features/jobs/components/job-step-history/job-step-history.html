@@ -1,0 +1,50 @@
+<!--<p-table [value]="steps()">-->
+<!--  <ng-template #header>-->
+<!--    <tr>-->
+<!--      <th>Plugin</th>-->
+<!--      <th>Status</th>-->
+<!--      <th>Message</th>-->
+<!--      <th>Date</th>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--  <ng-template #body let-step>-->
+<!--    <tr>-->
+<!--      <td>{{ step.pluginName }}</td>-->
+<!--      <td>{{ step.executionStatus }}</td>-->
+<!--      <td>-->
+<!--        @if (step.executionStatus === 'ERROR') {-->
+<!--          <ng-container [ngTemplateOutlet]="errorTemplate" [ngTemplateOutletContext]="{ $implicit: step }"/> /-->
+<!--        } @else {-->
+<!--          <pre>{{ step.data |json }}</pre>-->
+<!--        }-->
+<!--      </td>-->
+<!--      <td>{{ step.updatedAt |date:'dd/MM/yyyy hh:mm:ss' }}</td>-->
+<!--    </tr>-->
+<!--  </ng-template>-->
+<!--</p-table>-->
+<p-timeline [value]="steps()">
+  <ng-template #marker let-event>
+    <i class="pi pi-circle-fill"
+       [class.text-green-500]="event.executionStatus === 'SUCCESS'"
+       [class.text-yellow-500]="event.executionStatus === 'EXECUTING'"
+       [class.text-red-500]="event.executionStatus === 'FAILED'"></i>
+  </ng-template>
+  <ng-template #opposite let-event>
+    {{ event.pluginName }} - {{ event.updatedAt |date:'dd/MM/yyyy hh:mm:ss' }}
+  </ng-template>
+  <ng-template #content let-event>
+    {{ event.data |json }}
+  </ng-template>
+
+</p-timeline>
+
+
+<ng-template #errorTemplate let-step>
+  <div class="flex flex-col gap-2">
+    @if (step.humanReadable) {
+      <p>{{ step.humanReadable }}</p>
+    } @else {
+      <p>{{ step.errorMessage }}</p>
+    }
+  </div>
+</ng-template>

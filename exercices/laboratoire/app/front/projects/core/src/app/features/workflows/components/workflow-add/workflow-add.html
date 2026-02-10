@@ -1,0 +1,5 @@
+@let plugin = metadataPlugin();
+
+<plugin-form [plugin]="plugin" [formValue]="{active: false}" [pluginIndex]="0"/>
+
+<p-button [label]="'workflow.add.addButton' |translate" (onClick)="handleSubmit()"/>

@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+@import "./app/shared/modules/menu/styles/menu.css" layer(base);
+@import "./app/shared/ui/m-indicator/m-indicator.css" layer(base);
+@import "./app/shared/styles/h-title/h-title.css" layer(base);
+
+@plugin "tailwindcss-primeui";
+
+body {
+  @apply bg-sky-50;
+}
+
+.memoco-icon.edit {
+  mask-image: url("/imgs/edit.svg");
+}
+
+.memoco-icon.scale-3 {
+  mask-size: 3rem 3rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+/*.p-scrollpanel-bar {*/
+/*  background-color: var(--p-primary-500);*/
+/*}*/

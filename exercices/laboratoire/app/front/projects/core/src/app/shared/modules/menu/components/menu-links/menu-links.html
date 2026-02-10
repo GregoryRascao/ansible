@@ -1,0 +1,5 @@
+<nav [class.vMenu]="isVertical()" [class.hMenu]="isHorizontal()">
+  @for (menuItem of menuItems(); track menuItem.label) {
+    <menu-link [menuItem]="menuItem" />
+  }
+</nav>

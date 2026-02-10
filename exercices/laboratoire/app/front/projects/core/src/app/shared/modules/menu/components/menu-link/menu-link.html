@@ -1,0 +1,67 @@
+<!--@let icon = iconDef();-->
+@let link = menuItem();
+
+<ng-template #routerLink let-link let-label="label" let-icon="icon">
+  <a [routerLink]="link" routerLinkActive="active">
+    @if (icon && icon.position === 'left') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+    {{ label }}
+    @if (icon && icon.position === 'right') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+  </a>
+</ng-template>
+
+<ng-template #externalLink let-url let-label="label" let-icon="icon">
+  <a [href]="url" target="_blank">
+    @if (icon && icon.position === 'left') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+    {{ label }}
+    @if (icon && icon.position === 'right') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+  </a>
+</ng-template>
+
+<ng-template #commandTemplate let-command let-label="label" let-icon="icon">
+  <a class="hover:cursor-pointer" (click)="executeCommand(command)">
+    @if (icon && icon.position === 'left') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+    {{ label }}
+    @if (icon && icon.position === 'right') {
+      <i class="pi" [ngClass]="icon.name"></i>
+    }
+  </a>
+</ng-template>
+
+<ng-template #linkTemplate let-link>
+  @if (link.url) {
+    <ng-container [ngTemplateOutlet]="externalLink"
+                  [ngTemplateOutletContext]="{ $implicit: link.url, label: link.label, icon: { name: link.icon, position: link.iconPosition } }"/>
+  } @else if (link.command) {
+    <ng-container [ngTemplateOutlet]="commandTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: link.command, label: link.label, icon: { name: link.icon, position: link.iconPosition } }"/>
+  } @else {
+    <ng-container [ngTemplateOutlet]="routerLink"
+                  [ngTemplateOutletContext]="{ $implicit: link.routerLink, label: link.label, icon: { name: link.icon, position: link.iconPosition } }"/>
+  }
+</ng-template>
+
+<div class="core-menu-link" [class.vMenu]="isVertical()" [class.hMenu]="isHorizontal()">
+  @if (link.items) {
+    <span class="core-menu-link-group">{{ link.label }}</span>
+    @for (item of link.items; track item.label) {
+      <ng-container [ngTemplateOutlet]="linkTemplate"
+                    [ngTemplateOutletContext]="{ $implicit: item }"/>
+    }
+  } @else {
+    <ng-container [ngTemplateOutlet]="linkTemplate"
+                  [ngTemplateOutletContext]="{ $implicit: link }"/>
+  }
+
+
+</div>
+

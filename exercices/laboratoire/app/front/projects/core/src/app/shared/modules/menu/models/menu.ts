@@ -1,0 +1,21 @@
+export type MenuIconPosition = 'left' | 'right' | 'top' | 'bottom';
+export type MenuItemOptions = {
+  id?: string;
+  separator?: boolean;
+  label?: string;
+  icon?: string;
+  shortcut?: string;
+  disabled?: boolean;
+  url?: string;
+  target?: string;
+  command?: (event?: any) => void;
+  visible?: boolean;
+  style?: any;
+  class?: string;
+  labelStyle?: any;
+  labelClass?: string;
+  iconPosition?: MenuIconPosition;
+  routerLink?: string[] | string;
+  items?: MenuItemOptions[];
+  onInteract?: (event: MouseEvent) => void;
+};

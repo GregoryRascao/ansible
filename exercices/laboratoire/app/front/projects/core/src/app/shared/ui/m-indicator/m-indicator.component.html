@@ -1,0 +1,13 @@
+<div class="flex flex-row gap-2 items-center">
+  <div
+    class="status-indicator"
+    [class.circle]="shape() == 'circle'"
+    [class.square]="shape() == 'square'"
+    [class.status-indicator-green]="status() == 'green'"
+    [class.status-indicator-orange]="status() == 'orange'"
+    [class.status-indicator-red]="status() == 'red'"
+    [class.status-indicator-gray]="status() == 'grey'"
+    [class.pulse]="pulse()"
+  ></div>
+  <ng-content />
+</div>

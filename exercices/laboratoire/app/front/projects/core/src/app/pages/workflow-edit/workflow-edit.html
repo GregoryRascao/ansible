@@ -1,0 +1,66 @@
+@let formValues = pluginTypeConfigs();
+
+<p-stepper class="h-[5vh]" [value]="1">
+  <p-step-list>
+    <p-step [value]="1" (click)="onChangeType('metadata')">{{ 'workflow.metadata' |translate }}</p-step>
+    <p-step [value]="2" (click)="onChangeType('source')">{{ 'workflow.source' |translate }}</p-step>
+    <p-step [value]="3" (click)="onChangeType('transform')">{{ 'workflow.transform' |translate }}</p-step>
+    <p-step [value]="4" (click)="onChangeType('destination')">{{ 'workflow.destination' |translate }}</p-step>
+    <p-step [value]="5" (click)="onChangeType('resume')">{{ 'workflow.resume' |translate }}</p-step>
+  </p-step-list>
+</p-stepper>
+
+<p-scroll-panel class="h-[95vh]">
+
+  @if (selectType() == 'metadata') {
+    <p-accordion value="0" [multiple]="false" class="w-full mr-2">
+      @for (plugin of workflowPlugins(); track plugin.uuid; let i = $index) {
+        <p-accordion-panel [value]="i.toString()">
+          <p-accordion-header>{{ plugin.name }}</p-accordion-header>
+          <p-accordion-content>
+            <plugin-form [plugin]="plugin" [formValue]="formValues[i]" [pluginIndex]="i"
+                         (valueChange)="onPluginValueChange('metadata', i, $event)"></plugin-form>
+            <p-button [label]="'workflow.resume.submit' |translate" (onClick)="onSubmit()"/>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
+    </p-accordion>
+  }
+  @if (['source', 'transform', 'destination'].includes(selectType()!)) {
+    <div class="flex flex-col gap-2">
+      <div class="flex flex-row gap-2">
+        <p-select [options]="plugins()" optionLabel="name" placeholder="Type" #select/>
+        <p-button label="Ajouter" (onClick)="addPlugin(select.value)"/>
+      </div>
+      <p-accordion value="0" [multiple]="false" class="w-full mr-2">
+        @for (plugin of workflowPlugins(); track plugin.uuid; let i = $index) {
+          <p-accordion-panel [value]="i.toString()">
+            <p-accordion-header>
+              <div class="grid grid-cols-12 gap-3">
+                <div class="col-1 flex flex-col gap-3">
+                  <p-button (onClick)="reorder($event, 'up', $index)" [icon]="PrimeIcons.ANGLE_DOUBLE_UP"/>
+                  <p-button (onClick)="reorder($event,'down', $index)" [icon]="PrimeIcons.ANGLE_DOUBLE_DOWN"/>
+                </div>
+                <div class="col-span-3 content-center font-bold text-[20px]">{{ plugin.name }}</div>
+                <div class="col-start-12 content-center">
+                  <p-button severity="danger" [label]="'workflow.edit.remove' |translate"
+                            (onClick)="removeStep(plugin.type, i)"/>
+                </div>
+              </div>
+            </p-accordion-header>
+            <p-accordion-content>
+              <plugin-form [plugin]="plugin" [formValue]="formValues[i]" [pluginIndex]="i"
+                           (valueChange)="onPluginValueChange(plugin.type, i, $event)"></plugin-form>
+              <p-button [label]="'workflow.resume.submit' |translate" (onClick)="onSubmit()"/>
+            </p-accordion-content>
+          </p-accordion-panel>
+        }
+      </p-accordion>
+    </div>
+  }
+  @if (selectType() == 'resume' && workflow()) {
+    <workflow-resume [workflow]="$store.workflow()!"/>
+  }
+</p-scroll-panel>
+
+<p-toast position="center"/>

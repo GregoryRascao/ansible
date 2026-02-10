@@ -1,0 +1,8 @@
+:root {
+  --p-indicator-size: 15px;
+  --p-indicator-pulse-duration: 2s;
+  --p-indicator-background-green: var(--color-green-500);
+  --p-indicator-background-orange: var(--color-orange-500);
+  --p-indicator-background-red: var(--color-red-500);
+  --p-indicator-background-gray: var(--color-gray-500);
+}

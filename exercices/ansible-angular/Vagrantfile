@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/jammy64"
+
+  config.vm.network "public_network"
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+    vb.cpus = 2
+    vb.name = "angular-ansible"
+  end
+
+  # Création utilisateur ansible
+  config.vm.provision "shell", inline: <<-SHELL
+    USER_NAME="ansible"
+    PUBLIC_KEY="ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEAjQ4O/lmrc9Ef3s/sIztLfMd+nQ4bF81zMKa211hSZ thaore@ICT-210-12"
+
+    id -u $USER_NAME &>/dev/null || useradd -m -s /bin/bash $USER_NAME
+
+    mkdir -p /home/$USER_NAME/.ssh
+    echo "$PUBLIC_KEY" > /home/$USER_NAME/.ssh/authorized_keys
+
+    chown -R $USER_NAME:$USER_NAME /home/$USER_NAME/.ssh
+    chmod 700 /home/$USER_NAME/.ssh
+    chmod 600 /home/$USER_NAME/.ssh/authorized_keys
+
+    echo "$USER_NAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USER_NAME
+    chmod 0440 /etc/sudoers.d/$USER_NAME
+  SHELL
+
+end

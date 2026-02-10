@@ -1,0 +1,5 @@
+---
+api_repo_url: "https://gitlab.com/fovyn/devops-angular-back.git"
+frontend_repo_url: "https://gitlab.com/fovyn/devops-angular.git"
+server_name: "ovyn.be"
+api_port: 3000

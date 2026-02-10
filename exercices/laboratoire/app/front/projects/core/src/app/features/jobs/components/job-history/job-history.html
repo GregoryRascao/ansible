@@ -1,0 +1,46 @@
+@let loading = jobResource.isLoading;
+
+<div class="grid grid-cols-4 gap-4">
+  <div class="col-span-4 flex flex-row gap-3">
+    <span>{{ "job.message" | translate }}</span>
+    <p-button
+      [label]="'job.acknowledge' | translate"
+      (onClick)="acknowledgeAll()"
+    />
+  </div>
+  @if (loading()) {
+    <p-progressSpinner/>
+  } @else if (!jobs()) {
+    <span>{{ "job.noJob" | translate }}</span>
+  } @else if (jobResource.error()) {
+    <span>{{ "job.error" | translate }}</span>
+  } @else {
+    @for (job of jobs(); track job._id) {
+      <div>
+        <p-card
+          [class.bg-red-100]="job.status == 'ERROR'"
+          [class.bg-green-100]="job.status == 'SUCCESS'"
+          (click)="viewJobStep(job)"
+        >
+          <div class="flex flex-col gap-2">
+            <h3 class="text-center">{{ job.workflowName }}</h3>
+            <p>
+              {{ job.status }} &#64;
+              {{ job.createdAt | date : "dd/MM/yyyy hh:mm:ss" }}
+            </p>
+            <p-button
+              severity="warn"
+              [label]="'job.acknowledge' | translate"
+              (onClick)="acknowledgeJob($event, job)"
+            />
+          </div>
+        </p-card>
+      </div>
+    }
+  }
+</div>
+
+
+<!--
+ {"_id":"6920a558cd7dd65eea2e4279","job_id":"673e6eaf-011d-4dcd-a63e-4ef6613d3379","workflow_id":"691f88d839ac56bb9a1b0763","status":"PENDING","acknowledged":true,"createdAt":"2025-11-21T17:46:00.064Z","updatedAt":"2025-11-21T17:46:00.064Z","__v":0}
+ -->

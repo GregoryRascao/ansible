@@ -1,0 +1,37 @@
+{
+  "workflow": {
+    "metadata": "Metadata",
+    "source": "Source",
+    "transform": "Transformation",
+    "destination": "Destination",
+    "resume": "Aperçu",
+    "add": {
+      "addButton": "Ajouter un workflow"
+    },
+    "edit": {
+      "remove": "Supprimer"
+    },
+    "form": {
+      "errors": {
+        "default": "{label} est invalide.",
+        "required": "{label} est obligatoire",
+        "minLength": "{label} doit contenir au moins {minlength} caractères.",
+        "maxLength": "{label} doit contenir au plus {maxLength} caractères.",
+        "email": "{label} doit être une adresse e-mail valide.",
+        "pattern": "{label} n'a pas le bon format.",
+        "min": "{label} doit être supérieur ou égal à {min}.",
+        "max": "{label} doit être supérieur ou égal à {max}."
+      }
+    }
+  },
+  "plugin": {
+    "form": {
+      "addItem": "Ajouter un item"
+    }
+  },
+  "error": {
+    "job": {
+      "notFound": "Le job n'est pas trouvé!"
+    }
+  }
+}

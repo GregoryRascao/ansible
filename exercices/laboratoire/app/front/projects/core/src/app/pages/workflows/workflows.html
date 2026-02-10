@@ -1,0 +1,44 @@
+@if (workflowsIsLoading()) {
+  <p-progressSpinner/>
+} @else if (workflows()) {
+  <workflow-list [workflows]="workflows()!">
+    <ng-template #caption>
+      <div class="workflow-list-header">
+        <p-button label="Refresh" icon="pi pi-refresh" severity="info" (onClick)="refreshWorkflow()"/>
+        <p-button severity="info" label="New workflow" icon="pi pi-plus" (onClick)="addWorkflow()"/>
+      </div>
+    </ng-template>
+    <ng-template #actions let-item>
+      <div class="flex flex-row justify-center gap-1 mx-0">
+        @if (item.auditing.active) {
+          <p-button severity="danger" [pTooltip]="'workflow.list.tooltip.stop' |translate" tooltipPosition="bottom"
+                    (onClick)="stopWorkflow(item)">
+            <p-image src="imgs/stop.svg" width="24" height="24"/>
+          </p-button>
+        } @else {
+          <p-button severity="success" [pTooltip]="'workflow.list.tooltip.play' |translate" tooltipPosition="bottom"
+                    (onClick)="playWorkflow(item)">
+            <p-image src="imgs/play.svg" width="24" height="24"/>
+          </p-button>
+        }
+        <p-button [pTooltip]="'workflow.list.tooltip.copy' |translate" tooltipPosition="bottom"
+                  (onClick)="copyWorkflow(item)">
+          <p-image src="imgs/copy.svg" width="24" height="24"/>
+        </p-button>
+        <p-button severity="warn" [pTooltip]="'workflow.list.tooltip.one' |translate" tooltipPosition="bottom"
+                  (onClick)="oneTimeWorkflow(item)" [loading]="item.running">
+          <p-image src="imgs/one.svg" width="24" height="24"/>
+        </p-button>
+        <p-button severity="info" [routerLink]="['./', item._id]" [pTooltip]="'workflow.list.tooltip.edit' |translate"
+                  tooltipPosition="bottom">
+          <p-image src="imgs/edit.svg" width="24" height="24"/>
+        </p-button>
+        <p-button severity="danger" [pTooltip]="'workflow.list.tooltip.archive' |translate" tooltipPosition="bottom"
+                  (onClick)="archiveWorkflow(item)">
+          <p-image src="imgs/archive.svg" width="24" height="24"/>
+        </p-button>
+      </div>
+    </ng-template>
+  </workflow-list>
+}
+<p-toast position="center"/>

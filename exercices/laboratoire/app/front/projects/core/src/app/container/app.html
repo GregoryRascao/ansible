@@ -1,0 +1,88 @@
+<ng-template #menuContainer let-items>
+  <menu-container>
+    <ng-template #start>
+      <div class="flex items-center mb-2" [class.flex-col]="menuOrientation() === 'vertical'"
+           [class.flex-row]="menuOrientation() === 'horizontal'">
+        <p-image src="favicon.ico" class="w-20 h-20 mx-auto cursor-pointer" [routerLink]="['/']"/>
+        <span class="text-2xl font-medium" (click)="signOut()">{{ title() }}<i
+          class="ml-2 pi pi-sign-out cursor-pointer text-primary-600"></i></span>
+      </div>
+      <hr class="h-0.5 w-full text-gray-300"/>
+      <menu-links [menuItems]="items"/>
+    </ng-template>
+    <ng-template #end>
+      <p-image src="imgs/memoco-declinaison.png" imageClass="w-40 mx-auto" alt="Memoco Logo"/>
+    </ng-template>
+  </menu-container>
+</ng-template>
+
+<ng-template #menuDrawable let-items>
+  <p-menubar>
+    <ng-template #start>
+      <p-button variant="text" icon="pi pi-bars" (click)="menuVisible.set(!menuVisible())"/>
+    </ng-template>
+  </p-menubar>
+  <p-drawer [(visible)]="menuVisible" [position]="menuPosition()" [modal]="true">
+    <ng-template #headless>
+      <ng-container *ngTemplateOutlet="menuContainer; context: { $implicit: items }"/>
+    </ng-template>
+  </p-drawer>
+  <router-outlet/>
+</ng-template>
+<ng-template #menuLeft let-items>
+  <div class="flex flex-row gap-2">
+    <nav style="width: var(--p-core-menu-vertical-width)">
+      <ng-container *ngTemplateOutlet="menuContainer; context: { $implicit: items }"></ng-container>
+    </nav>
+    <section style="width: var(--p-core-menu-vertical-page-width); margin: var(--p-core-menu-container-margin) 0;">
+      <router-outlet/>
+    </section>
+  </div>
+</ng-template>
+<ng-template #menuRight let-items>
+  <div class="flex flex-row gap-2">
+    <section style="width: var(--p-core-menu-vertical-page-width)">
+      <router-outlet/>
+    </section>
+    <nav style="width: var(--p-core-menu-vertical-width)">
+      <ng-container *ngTemplateOutlet="menuContainer; context: { $implicit: items }"></ng-container>
+    </nav>
+  </div>
+</ng-template>
+<ng-template #menuTop let-items>
+  <div class="flex flex-col">
+    <nav style="height: var(--p-core-menu-horizontal-height)">
+      <ng-container *ngTemplateOutlet="menuContainer; context: { $implicit: items }"></ng-container>
+    </nav>
+    <section class="pt-2" style="height: var(--p-core-menu-horizontal-page-height)">
+      <router-outlet/>
+    </section>
+  </div>
+</ng-template>
+<ng-template #menuBottom let-items>
+  <div class="flex flex-col inset-shadow-sm gap-2">
+    <section class="pb-2" style="min-height: var(--p-core-menu-horizontal-page-height);">
+      <router-outlet/>
+    </section>
+    <nav style="height: var(--p-core-menu-horizontal-height)">
+      <ng-container *ngTemplateOutlet="menuContainer; context: { $implicit: items }"></ng-container>
+    </nav>
+  </div>
+</ng-template>
+
+<div class="h-full w-full">
+  @if (menuToggleable()) {
+    <ng-container *ngTemplateOutlet="menuDrawable; context: { $implicit: menuItems() }"/>
+  } @else if (menuPosition() === 'left') {
+    <ng-container *ngTemplateOutlet="menuLeft; context: { $implicit: menuItems() }"/>
+  } @else if (menuPosition() === 'right') {
+    <ng-container *ngTemplateOutlet="menuRight; context: { $implicit: menuItems() }"/>
+  } @else if (menuPosition() === 'top') {
+    <ng-container *ngTemplateOutlet="menuTop; context: { $implicit: menuItems() }"/>
+  } @else if (menuPosition() === 'bottom') {
+    <ng-container *ngTemplateOutlet="menuBottom; context: { $implicit: menuItems() }"/>
+  }
+
+</div>
+
+<p-toast position="center"/>

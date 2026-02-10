@@ -1,0 +1,64 @@
+{
+  "workflow": {
+    "metadata": "Metadata",
+    "source": "Source",
+    "transform": "Transform",
+    "destination": "Destination",
+    "resume": "Resume",
+    "resume.submit": "Submit",
+    "add": {
+      "addButton": "Add a workflow"
+    },
+    "edit": {
+      "remove": "Remove"
+    },
+    "list": {
+      "status": "Execution status",
+      "name": "Name",
+      "info": "Info",
+      "cronExpression": "Cron expression",
+      "lastExecutionDate": "Last execution date",
+      "actions": "Actions",
+      "tooltip": {
+        "stop": "Stop the workflow",
+        "play": "Play the workflow",
+        "copy": "Copy the workflow",
+        "one": "Execute one time the workflow",
+        "edit": "Edit the workflow",
+        "archive": "Archived the workflow"
+      },
+      "badge": "No failed logs",
+      "failed": {
+        "message": "The workflow has at least one job failed that's not acknowledge",
+        "button": "Show failed jobs"
+      }
+    },
+    "form": {
+      "errors": {
+        "default": "{label} is invalid.",
+        "required": "{label} is required",
+        "minLength": "{label} must contain at least {minlength} characters.",
+        "maxLength": "{label} must contain at most {maxLength} characters.",
+        "email": "{label} must be a valid email address.",
+        "pattern": "{label} does not have the correct format.",
+        "min": "{label} must be greater than or equal to {min}.",
+        "max": "{label} must be less than or equal to {max}.",
+        "json": "{label} must be a valid JSON."
+      }
+    }
+  },
+  "job": {
+    "message": "Do you want to acknowledge all jobs ?",
+    "acknowledge": "Acknowledge"
+  },
+  "plugin": {
+    "form": {
+      "addItem": "Add item",
+      "removeItem": "Remove item"
+    }
+  },
+  "error": {
+    "server": "An error occurred on the server",
+    "server.preflight": "An error occurred on the server, please check your network connection"
+  }
+}

@@ -1,0 +1,120 @@
+- hosts: web
+  become: yes
+
+  vars:
+    app_dir: /opt/nsi-angular
+    repo_url: https://gitlab.com/fovyn/devops-angular
+    backend_dir: /opt/angular-back
+    backend_repo: https://gitlab.com/fovyn/devops-angular-back.git
+
+
+  tasks:
+
+  - name: Installation des paquets système
+    apt:
+      name:
+        - git
+        - nginx
+        - curl
+      update_cache: yes
+
+  - name: Installation NodeJS 20
+    shell: |
+      curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+      apt-get install -y nodejs
+
+  - name: Installation Angular CLI
+    npm:
+      name: "@angular/cli"
+      global: yes
+
+  - name: Clonage du dépôt
+    git:
+      repo: "{{ repo_url }}"
+      dest: "{{ app_dir }}"
+      force: yes
+
+  - name: Installation dépendances npm
+    npm:
+      path: "{{ app_dir }}"
+
+  - name: Build Angular
+    command: npm run build
+    args:
+      chdir: "{{ app_dir }}"
+
+  - name: Déployer application Angular
+    copy:
+      src: "{{ app_dir }}/dist/devops-angular/browser/"
+      dest: /var/www/html/
+      remote_src: yes
+
+  - name: Redémarrer nginx
+    service:
+      name: nginx
+      state: restarted
+      enabled: yes
+
+  - name: Cloner backend
+    git:
+      repo: "{{ backend_repo }}"
+      dest: "{{ backend_dir }}"
+      force: yes
+      
+  - name: Installer dépendances backend
+    npm:
+      path: "{{ backend_dir }}"
+
+  - name: Création service backend
+    copy:
+      dest: /etc/systemd/system/angular-back.service
+      content: |
+        [Unit]
+        Description=Angular Backend
+        After=network.target
+
+        [Service]
+        Type=simple
+        User=ansible
+        WorkingDirectory={{ backend_dir }}
+        ExecStart=/usr/bin/npm start
+        Restart=always
+        Environment=PORT=3000
+
+        [Install]
+        WantedBy=multi-user.target
+  
+  - name: Activer service backend
+    systemd:
+        name: angular-back
+        daemon_reload: yes
+        state: restarted
+        enabled: yes
+
+  - name: Configuration nginx proxy
+    copy:
+      dest: /etc/nginx/sites-available/default
+      content: |
+        server {
+            listen 80;
+
+            location / {
+                root /var/www/html;
+                try_files $uri $uri/ /index.html;
+            }
+
+            location /api/ {
+                proxy_pass http://localhost:3000/;
+                proxy_http_version 1.1;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+            }
+        }
+        
+  - name: Redémarrer nginx
+    service:
+      name: nginx
+      state: restarted
+
+
+

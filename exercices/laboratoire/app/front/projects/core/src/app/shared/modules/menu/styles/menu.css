@@ -1,0 +1,46 @@
+:root {
+  --p-core-menu-font-size: 1rem;
+  --p-core-menu-font-weight: bolder;
+
+  --p-core-menu-icon-size: 1rem;
+
+  --p-core-menu-container-background-color: white;
+  --p-core-menu-container-box-shadow: var(--shadow-xl);
+  --p-core-menu-container-padding: calc(var(--spacing) * 2);
+  --p-core-menu-container-margin: 0;
+
+  --p-core-menu-vertical-height: calc(100vh - var(--p-core-menu-container-margin) * 2);
+  --p-core-menu-vertical-width: 10%;
+  --p-core-menu-vertical-page-width: calc(100% - var(--p-core-menu-vertical-width));
+
+  --p-core-menu-horizontal-height: 5vh;
+  --p-core-menu-horizontal-width: 100%;
+  --p-core-menu-horizontal-page-height: calc(100vh - var(--p-core-menu-horizontal-height));
+
+  --p-core-menu-start-justify: start;
+  --p-core-menu-start-align: center;
+  --p-core-menu-start-gap: 0;
+
+  --p-core-menu-center-justify: center;
+  --p-core-menu-center-align: center;
+  --p-core-menu-center-gap: 0;
+
+  --p-core-menu-end-justify: end;
+  --p-core-menu-end-align: center;
+  --p-core-menu-end-gap: 0;
+
+  --p-core-menu-links-justify: start;
+
+  --p-core-menu-link-color: black;
+  --p-core-menu-link-active: black;
+  --p-core-menu-link-hover: black;
+  --p-core-menu-link-focus: black;
+  --p-core-menu-link-disabled: black;
+
+  --p-core-menu-link-group-color: black;
+  --p-core-menu-link-group-size: black;
+  --p-core-menu-link-group-weight: bolder;
+
+  --p-core-menu-link-font-size: var(--p-core-menu-font-size);
+  --p-core-menu-link-icon-size: var(--p-core-menu-icon-size);
+}

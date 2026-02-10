@@ -1,0 +1,8 @@
+### BetterStack - status - admin
+GET http://localhost:3000/api/health
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJmbGF2aWFuQG1lbW9jby5ldSIsInJvbGVzIjoiYWRtaW4iLCJpYXQiOjE3NDg0MjIzNjAsImV4cCI6MTc0ODQyMzI2MH0.8NUKTKHRvO1tnJYMf8DahaLYW6jkOWK7hhfzeasbMhg
+
+### BetterStack - status - user
+GET http://localhost:3000/api/health
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QG1lbW9jby5ldSIsInJvbGVzIjoidXNlciIsImlhdCI6MTc0ODQyMjQ3OCwiZXhwIjoxNzQ4NDIzMzc4fQ.w37kU0E5yyViMzBPLI_XQDwAHzmGmRVzC62BKq2YJ7o
+

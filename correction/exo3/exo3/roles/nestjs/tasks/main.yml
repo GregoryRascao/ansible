@@ -1,0 +1,80 @@
+---
+- name: Update apt cache
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Add Node.js 20.x repository
+  shell: curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+  args:
+    executable: /bin/bash
+  become: yes
+
+- name: Install Node.js
+  apt:
+    name: nodejs
+    state: present
+  become: yes
+
+- name: Install PM2 globally
+  npm:
+    name: pm2
+    global: yes
+  become: yes
+
+- name: Api folder stat
+  stat:
+    path: /var/www/api
+  register: file_stats
+
+- name: Remove old repository
+  command: rm -R /var/www/api
+  become: yes
+  when:
+    - file_stats.stat.pw_name == 'www-data'
+    - file_stats.stat.gr_name == 'www-data'
+
+- name: Clone NestJS repository
+  git:
+    repo: "{{ api_repo_url }}"
+    dest: /var/www/api
+    version: main
+    force: yes
+
+- name: Change repository owner
+  file:
+    path: /var/www/api
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    recurse: yes
+
+- name: Install dependencies
+  command: npm install
+  args:
+    chdir: /var/www/api
+  become: yes
+
+- name: Build NestJS application
+  command: npm run build
+  args:
+    chdir: /var/www/api
+  become: yes
+
+- name: Check if PM2 process is running
+  command: pm2 describe nest-api
+  register: pm2_check
+  ignore_errors: yes
+  changed_when: false
+
+- name: Start NestJS API
+  command: pm2 start /var/www/api/dist/main.js --name nest-api
+  args:
+    chdir: /var/www/api
+  when: pm2_check.rc != 0
+  notify: Restart NestJS API
+
+- name: Restart NestJS API
+  command: pm2 restart nest-api
+  when: pm2_check.rc == 0
+  notify: Restart NestJS API

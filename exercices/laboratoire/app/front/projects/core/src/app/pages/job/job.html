@@ -1,0 +1,21 @@
+<div class="flex flex-col gap-4">
+  <p-panel [showHeader]="true" header="Job Filters">
+    <div class="flex flex-col gap-4">
+      <div class="flex flex-row gap-2">
+        <div>
+          <label>Start At: </label>
+          <p-datePicker [(ngModel)]="startAt"/>
+        </div>
+        <div>
+          <label>End At: </label>
+          <p-datePicker [(ngModel)]="endAt"/>
+        </div>
+      </div>
+    </div>
+  </p-panel>
+
+
+  <p-panel header="Job History">
+    <job-history [startAt]="startAt()" [endAt]="endAt()"/>
+  </p-panel>
+</div>

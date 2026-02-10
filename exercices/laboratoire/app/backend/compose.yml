@@ -1,0 +1,21 @@
+name: memoco-3053-waves
+services:
+  mongo:
+    image: mongodb/mongodb-community-server
+    ports:
+      - '27017:27017'
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=qixPDZsMNBI4mvinlJLVGof9TVeVY9C7Mb5ht8X3
+      - MONGO_INITDB_DATABASE=etl
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.2
+    container_name: keycloak
+    command:
+      - start-dev
+    environment:
+      KC_DB: dev-file
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    ports:
+      - '8080:8080'

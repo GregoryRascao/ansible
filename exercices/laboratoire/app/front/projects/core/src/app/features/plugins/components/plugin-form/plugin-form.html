@@ -1,0 +1,34 @@
+@let formDef = pluginFormDef();
+
+@if (pluginForm) {
+  <form [formGroup]="pluginForm" class="flex flex-col gap-4">
+    @for (fieldDef of formDef.fields; track fieldDef.name) {
+      @if (isVisible(fieldDef, pluginForm) && fieldDef.controlType == 'control') {
+        <plugin-form-control [fieldDef]="fieldDef" [formControlName]="fieldDef.name"
+                             [control]="pluginForm.get(fieldDef.name)!">
+        </plugin-form-control>
+      } @else if (isVisible(fieldDef, pluginForm) && fieldDef.controlType == 'group') {
+        <p-fieldset [legend]="fieldDef.label" [formGroupName]="fieldDef.name">
+          <plugin-form-group [group]="getGroup(pluginForm, fieldDef.name)" [groupDef]="fieldDef"/>
+        </p-fieldset>
+      } @else if (isVisible(fieldDef, pluginForm) && fieldDef.controlType == 'array') {
+        <p-fieldset [formArrayName]="fieldDef.name" [legend]="fieldDef.label">
+          <plugin-form-array [array]="getArray(pluginForm, fieldDef.name)" [arrayDef]="fieldDef"/>
+        </p-fieldset>
+        <!--        <plugin-form-array [array]="getArray(pluginForm, fieldDef.name)" [arrayDef]="fieldDef"/>-->
+      }
+    }
+  </form>
+
+  <ng-template #textareaTemplate let-fieldDef>
+    <p-inputgroup>
+      <p-floatlabel variant="on">
+        <label>{{ fieldDef.label }}</label>
+        <textarea pInputTextarea rows="5" cols="30"></textarea>
+      </p-floatlabel>
+    </p-inputgroup>
+  </ng-template>
+
+  <ng-template #checkboxTemplate></ng-template>
+  <ng-template #radioTemplate></ng-template>
+}

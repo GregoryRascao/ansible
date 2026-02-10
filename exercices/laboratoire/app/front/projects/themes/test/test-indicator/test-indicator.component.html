@@ -1,0 +1,22 @@
+<section class="flex flex-col gap-2">
+  <p-card [style.border]="'var(--p-card-border)'" class="rounded-md">
+    <article>
+      <h1 class="text-2xl font-bold">Test indicator sans PULSE</h1>
+      <m-indicator
+        status="green"
+        [pulse]="false"
+        [dt]="{ size: '2rem', background: { green: 'var(--color-blue-800)' } }"
+      >
+        Status Green
+      </m-indicator>
+      <m-indicator status="orange" [pulse]="false">Status Orange</m-indicator>
+      <m-indicator status="red" [pulse]="false">Status Red</m-indicator>
+    </article>
+    <article>
+      <h1 class="text-2xl font-bold">Test indicator avec PULSE</h1>
+      <m-indicator status="green" [pulse]="true">Status Green</m-indicator>
+      <m-indicator status="orange" [pulse]="true">Status Orange</m-indicator>
+      <m-indicator status="red" [pulse]="true">Status Red</m-indicator>
+    </article>
+  </p-card>
+</section>

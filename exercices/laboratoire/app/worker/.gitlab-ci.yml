@@ -1,0 +1,85 @@
+variables:
+  # Use the overlay2 storage driver for Docker-in-Docker (dind)
+  DOCKER_DRIVER: overlay2
+  # Base image tag, which is the repository image without a specific version tag
+  BASE_IMAGE: $CI_REGISTRY_IMAGE
+
+stages:
+  - build
+  - deploy
+
+.docker_build_template:
+  # Use the latest Docker image with dind for building
+  image: docker:latest
+  stage: build
+  services:
+    - docker:dind
+  # The full tag will include the commit tag
+  variables:
+    IMAGE_ACC: $BASE_IMAGE:acceptance
+    IMAGE_DEV: $BASE_IMAGE:development
+    IMAGE_PROD: $BASE_IMAGE:production
+  before_script:
+    # Log in to the GitLab Container Registry
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+# ----------------------------------------------------
+# 1. Development Build
+# Targets the 'dev' stage of the Dockerfile for fast, watch-mode capable image.
+# ----------------------------------------------------
+build_development:
+  extends: .docker_build_template
+  script:
+    # Build using the --target dev flag (for local-like experience with dev dependencies)
+    - docker build --pull --target dev -t $IMAGE_DEV .
+    - docker push $IMAGE_DEV
+  rules:
+    # Runs only if the Git tag ends with 'dev' (e.g., 'v1.0.0-dev')
+    - if: '$CI_COMMIT_TAG =~ /dev$/'
+
+# ----------------------------------------------------
+# 2. Acceptance Build
+# Targets the 'runner' stage and sets the NEST_ENV build-arg to 'acceptance'.
+# ----------------------------------------------------
+build_acceptance:
+  extends: .docker_build_template
+  script:
+    # Build using the --target runner flag (lean image)
+    # Pass the environment as a build argument: --build-arg NEST_ENV=acceptance
+    - docker build --pull --target runner --build-arg MODE=acceptance -t $IMAGE_ACC .
+    - docker push $IMAGE_ACC
+  rules:
+    # Runs only if the Git tag ends with 'acc' (e.g., 'v1.0.0-acc')
+    - if: $CI_COMMIT_BRANCH != "main"
+
+# ----------------------------------------------------
+# 3. Production Build
+# Targets the 'runner' stage (default NEST_ENV=production).
+# Pushes the versioned tag AND the 'latest' tag.
+# ----------------------------------------------------
+build_production:
+  extends: .docker_build_template
+  script:
+    # Build using the --target runner flag (lean image)
+    # The NEST_ENV defaults to 'production' in the Dockerfile, so we don't need a build-arg
+    - docker build --pull --target runner -t $IMAGE_PROD .
+    - docker push $IMAGE_PROD
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual
+
+update_latest_tag:
+  stage: deploy
+  needs:
+    - build_production
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker pull $IMAGE_PROD
+    - docker tag $IMAGE_PROD $BASE_IMAGE:latest
+    - docker push $BASE_IMAGE:latest
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+      when: manual

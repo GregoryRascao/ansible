@@ -1,0 +1,20 @@
+@let form = group();
+@let fields = groupFields();
+
+
+<div class="flex gap-2" [formGroup]="form" [class.flex-row]="inline()" [class.flex-col]="!inline()">
+  @for (fieldGroupDef of fields; track fieldGroupDef.name) {
+    @if (isVisible(fieldGroupDef, form) && fieldGroupDef.controlType == 'control') {
+      <plugin-form-control class="flex-1" [fieldDef]="fieldGroupDef" [formControlName]="fieldGroupDef.name"
+                           [control]="form.get(fieldGroupDef.name)!"/>
+    } @else if (isVisible(fieldGroupDef, form) && fieldGroupDef.controlType == 'group') {
+      <p-fieldset class="flex-1" [legend]="fieldGroupDef.label" [formGroupName]="fieldGroupDef.name">
+        <plugin-form-group [group]="getGroup(form, fieldGroupDef.name)" [groupDef]="fieldGroupDef"/>
+      </p-fieldset>
+    } @else if (isVisible(fieldGroupDef, form) && fieldGroupDef.controlType == 'array') {
+      <p-fieldset class="flex-1" [legend]="fieldGroupDef.label" [formArrayName]="fieldGroupDef.name">
+        <plugin-form-array [array]="getArray(form, fieldGroupDef.name)" [arrayDef]="fieldGroupDef"/>
+      </p-fieldset>
+    }
+  }
+</div>

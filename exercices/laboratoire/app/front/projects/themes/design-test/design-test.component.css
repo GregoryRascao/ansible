@@ -1,0 +1,53 @@
+div[orientation="vertical"] {
+  display: flex;
+
+  /* nav {
+    width: 15%;
+  } */
+
+  section {
+    width: 100%;
+
+    router-outlet > *:not(sign-in) {
+      width: 80%;
+      display: block;
+    }
+
+    router-outlet > sign-in {
+      width: 100%;
+      display: block;
+    }
+  }
+}
+
+div[orientation="horizontal"] {
+  nav {
+    height: 40px;
+  }
+
+  section {
+    width: 100%;
+    max-height: calc(100vh - 40px);
+
+    router-outlet > *:not(sign-in) {
+      display: block;
+    }
+  }
+}
+
+::ng-deep .p-drawer-content {
+  padding: 0;
+}
+::ng-deep .p-drawer-header {
+  display: none;
+}
+::ng-deep .ng-trigger-overlayAnimation {
+  border: none;
+}
+
+::ng-deep .p-drawer-left .p-drawer {
+  align-self: start;
+  width: 15rem;
+  height: 100%;
+  border-right-width: 1px;
+}

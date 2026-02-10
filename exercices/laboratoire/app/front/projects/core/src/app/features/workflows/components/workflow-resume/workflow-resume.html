@@ -1,0 +1,9 @@
+<p-panel [showHeader]="false" class="mr-2">
+  <div class="flex flex-col gap-2">
+    <p-scrollPanel class="h-[80vh]">
+      <pre>{{ workflow() |json }}</pre>
+    </p-scrollPanel>
+    <p-button [label]="'workflow.resume.submit' |translate" (onClick)="onSubmit()" />
+  </div>
+
+</p-panel>

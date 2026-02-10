@@ -1,0 +1,106 @@
+@let isExpandedAllVal = isExpandedAll();
+@let loading = isLoading();
+@let actions = actionsTemplate();
+@let captionRef = captionTemplate();
+
+
+<p-table #dt [value]="listState()" [loading]="loading" [scrollable]="true" scrollHeight="90vh" dataKey="_id"
+         rowGroupMode="subheader" groupRowsBy="metadata.folder" (onRowReorder)="handleRowReorder($event)"
+         [expandedRowKeys]="expandedRows()"
+         [globalFilterFields]="['metadata.name', 'metadata.executionStatus', 'metadata.folder']"
+         (onFilter)="onFilter($event, dt)">
+  <ng-template #caption>
+    <div class="flex flex-col gap-2">
+      @if (captionRef) {
+        <ng-container [ngTemplateOutlet]="captionRef"/>
+      }
+      <div class="flex flex-row justify-end gap-3">
+        <p-iconfield iconPosition="left" class="ml-auto">
+          <p-inputicon>
+            <i class="pi pi-search"></i>
+          </p-inputicon>
+          <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                 placeholder="Search keyword"/>
+        </p-iconfield>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #header>
+    <tr>
+      <th style="width: 3rem">
+        <p-button variant="text" pRipple text rounded class="mr-2"
+                  [icon]="isExpandedAllVal ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" (onClick)="toggleAll()"/>
+      </th>
+      <th class="text-center">{{ 'workflow.list.status' |translate }}</th>
+      <th class="text-center">{{ 'workflow.list.name' |translate }}</th>
+      <th class="text-center">{{ 'workflow.list.info' |translate }}</th>
+      <th class="text-center">{{ 'workflow.list.cronExpression' |translate }}</th>
+      <th class="text-center">{{ 'workflow.list.lastExecutionDate' |translate }}</th>
+      @if (actions) {
+        <th class="text-center">{{ 'workflow.list.actions' |translate }}</th>
+      }
+    </tr>
+  </ng-template>
+  <ng-template #groupheader let-workflow let-expanded="expanded">
+    <tr class="hover:cursor-pointer" (click)="toggleRow(workflow)">
+      <td colspan="7">
+        <p-button variant="text" pRipple text rounded class="mr-2"
+                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"/>
+        <span class="font-bold ml-2">{{ workflow.metadata.folder || 'unknow' }}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template #expandedrow let-item let-index="rowIndex">
+    <tr [pReorderableRow]="index"
+        [class.bg-red-100]="item.metadata.lastExecutionStatus === 'FAILED'"
+        [class.bg-green-100]="item.metadata.lastExecutionStatus === 'SUCCESS'"
+        [class.bg-yellow-100]="item.metadata.lastExecutionStatus === 'TIMEOUT'"
+        [class.bg-gray-100]="!item.auditing.active"
+    >
+      <td>
+        <span class="pi pi-bars" pReorderableRowHandle style="cursor: move;"></span>
+      </td>
+      <td class="text-center">
+        <ng-container [ngTemplateOutlet]="status" [ngTemplateOutletContext]="{ $implicit: item.metadata }"/>
+      </td>
+      <td>
+        {{ item.metadata.name }} <br>
+        @if (item.metadata.nbJobInFailedStatus && item.metadata.nbJobInFailedStatus > 0) {
+          <p-badge class="cursor-pointer" severity="danger" [value]="item.metadata.nbJobInFailedStatus"
+                   (click)="popover.toggle($event)"/>
+          <p-popover #popover appendTo="body">
+            <div class="flex flex-col gap-2">
+              <p>{{ 'workflow.list.failed.message' |translate }}</p>
+              <p-button [label]="'workflow.list.failed.button' |translate" severity="danger"
+                        (onClick)="showJobList(item, false)"/>
+            </div>
+          </p-popover>
+        } @else {
+          <p-badge class="cursor-pointer" severity="info" [value]="'workflow.list.badge' |translate"
+                   (click)="showJobList(item, false)"/>
+        }
+      </td>
+      <td>{{ item.metadata.description }}</td>
+      <td>{{ item.metadata.cronExpression }}</td>
+      <td>{{ item.metadata.lastExecutionDate |date:'dd/MM/yyyy HH:mm:ss' }}</td>
+      @if (actions) {
+        <td>
+          <ng-container [ngTemplateOutlet]="actions" [ngTemplateOutletContext]="{ $implicit: item }"/>
+        </td>
+      }
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog/>
+
+<ng-template #status let-item>
+  @if (item.lastExecutionStatus === 'SUCCESS') {
+    <i class="pi pi-check text-green-500"></i>
+  } @else if (item.lastExecutionStatus === 'FAILED') {
+    <i class="material-icons text-red-500">close</i>
+  } @else if (item.lastExecutionStatus === 'TIMEOUT') {
+    <i class="pi pi-question text-yellow-500"></i>
+  }
+</ng-template>
+
+<p-toast position="center"/>

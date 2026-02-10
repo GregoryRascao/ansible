@@ -1,0 +1,217 @@
+
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         10/8/2025  10:33 AM                common
+d-----         11/7/2025   8:07 AM                features
+d-----         9/24/2025   1:38 PM                shared
+d-----        10/10/2025   9:10 AM                types
+-a----         1/15/2026   1:56 PM           2589 app.module.ts
+-a----         1/14/2026   9:47 AM           1088 main.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/15/2026   1:56 PM                job
+d-----         1/14/2026   9:47 AM                keepalive
+d-----         1/14/2026   9:47 AM                plugin
+d-----         1/15/2026   1:56 PM                workflow
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\job
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----        10/10/2025   3:39 PM                errors
+d-----        10/10/2025   2:37 PM                schemas
+-a----         10/8/2025  12:33 PM            186 destination.model.ts
+-a----         1/15/2026   1:56 PM           4745 job-executor.service.ts
+-a----         1/14/2026   9:47 AM            333 job.module.ts
+-a----         10/8/2025  12:05 PM            299 source.model.ts
+-a----         10/8/2025  12:17 PM            608 transform.model.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\job\errors
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        10/10/2025   3:39 PM            163 JobError.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\job\schemas
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        10/10/2025   2:37 PM            140 destination.schema.ts
+-a----        10/10/2025   2:37 PM            135 source.schema.ts
+-a----        10/10/2025   2:37 PM            138 transform.schema.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\keepalive
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         1/14/2026   9:47 AM            182 keepalive.module.ts
+-a----         1/14/2026   9:47 AM            509 keepalive.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         11/7/2025   8:07 AM                errors
+d-----         1/15/2026   1:56 PM                fixtures
+d-----         11/7/2025   8:07 AM                models
+d-----         11/7/2025   8:07 AM                services
+-a----         12/5/2025   1:42 PM           2378 plugin-form.ts
+-a----         1/14/2026   9:47 AM           3128 plugin.module.ts
+-a----         11/7/2025   8:07 AM           3183 plugin.registry.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\errors
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/8/2025  11:51 AM             88 ConfigError.ts
+-a----         10/8/2025  11:51 AM             96 PluginNotFoundError.ts
+-a----         11/7/2025   8:07 AM            295 StepError.ts
+-a----         10/8/2025  11:51 AM            103 TransformStepMismatchError.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\fixtures
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        11/21/2025   9:02 AM           5591 plugin-fixtures.spec.ts
+-a----         1/15/2026   1:56 PM           7476 plugin-fixtures.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\models
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         11/7/2025   8:07 AM            237 base-plugin.ts
+-a----         11/7/2025   8:07 AM            228 destination-plugin.ts
+-a----         11/7/2025   8:07 AM            186 source-plugin.ts
+-a----         11/7/2025   8:07 AM            228 transform-plugin.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\services
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         12/3/2025   8:57 AM                destinations
+d-----        11/21/2025   8:34 AM                metadata
+d-----         1/15/2026   1:56 PM                sources
+d-----         1/15/2026   1:56 PM                transformers
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\services\destinations
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        11/21/2025   8:48 AM            767 ftp-destination-plugin.servic
+                                                  e.spec.ts
+-a----         11/7/2025   8:07 AM           5036 ftp-destination-plugin.servic
+                                                  e.ts
+-a----        11/21/2025   8:34 AM            806 mongo-destination-plugin.serv
+                                                  ice.spec.ts
+-a----         11/7/2025   4:00 PM           2642 mongo-destination-plugin.serv
+                                                  ice.ts
+-a----        11/21/2025   8:51 AM            773 sftp-destination-plugin.servi
+                                                  ce.spec.ts
+-a----         12/3/2025   8:57 AM           4000 sftp-destination-plugin.servi
+                                                  ce.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\services\metadata
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        11/21/2025   8:34 AM            731 metadata-plugin.service.spec.
+                                                  ts
+-a----        11/12/2025  10:59 AM           2341 metadata-plugin.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\services\sources
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        11/21/2025   8:34 AM            752 api-source-plugin.service.spe
+                                                  c.ts
+-a----         11/7/2025   3:56 PM          15885 api-source-plugin.service.ts
+-a----        11/21/2025   8:36 AM            659 elastic-search-source-plugin.
+                                                  service.spec.ts
+-a----         11/7/2025   3:56 PM           2480 elastic-search-source-plugin.
+                                                  service.ts
+-a----        11/21/2025   8:35 AM            752 ftp-source-plugin.service.spe
+                                                  c.ts
+-a----         11/7/2025   3:57 PM           4808 ftp-source-plugin.service.ts
+-a----        11/21/2025   8:36 AM            764 mongo-source-plugin.service.s
+                                                  pec.ts
+-a----         11/7/2025   3:57 PM           5478 mongo-source-plugin.service.t
+                                                  s
+-a----        11/21/2025   8:36 AM            764 mysql-source-plugin.service.s
+                                                  pec.ts
+-a----        11/21/2025   9:03 AM          15616 mysql-source-plugin.service.t
+                                                  s
+-a----        11/21/2025   8:35 AM            758 sftp-source-plugin.service.sp
+                                                  ec.ts
+-a----         1/15/2026   1:56 PM           7783 sftp-source-plugin.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\plugin\services\transformers
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----        11/21/2025   8:36 AM            815 csv2json-transformer-plugin.s
+                                                  ervice.spec.ts
+-a----         1/15/2026   1:56 PM           6070 csv2json-transformer-plugin.s
+                                                  ervice.ts
+-a----        11/21/2025   8:38 AM            821 group2csv-transformer-plugin.
+                                                  service.spec.ts
+-a----         11/7/2025   3:58 PM           3591 group2csv-transformer-plugin.
+                                                  service.ts
+-a----        11/21/2025   8:40 AM            823 json-group-transformer-plugin
+                                                  .service.spec.ts
+-a----         11/7/2025   3:58 PM           2488 json-group-transformer-plugin
+                                                  .service.ts
+-a----        11/21/2025   8:40 AM            829 json-unwind-transformer-plugi
+                                                  n.service.spec.ts
+-a----         1/15/2026   1:56 PM           3613 json-unwind-transformer-plugi
+                                                  n.service.ts
+-a----        11/21/2025   8:38 AM            815 json2csv-transformer-plugin.s
+                                                  ervice.spec.ts
+-a----         1/15/2026   1:56 PM           3360 json2csv-transformer-plugin.s
+                                                  ervice.ts
+-a----        11/21/2025   8:39 AM            821 json2json-transformer-plugin.
+                                                  service.spec.ts
+-a----         1/15/2026   1:56 PM           7724 json2json-transformer-plugin.
+                                                  service.ts
+-a----        11/21/2025   8:51 AM           1010 jsongroup2json-transformer-pl
+                                                  ugin.service.spec.ts
+-a----         11/7/2025   4:00 PM           4134 jsongroup2json-transformer-pl
+                                                  ugin.service.ts
+-a----        11/21/2025   8:39 AM            824 object2array-transformer-plug
+                                                  in.service.spec.ts
+-a----        11/12/2025   9:05 AM           3794 object2array-transformer-plug
+                                                  in.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\features\workflow
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         10/8/2025   2:38 PM           3337 worker.ts
+-a----         1/14/2026   9:47 AM            442 workflow.module.ts
+-a----        10/10/2025   3:39 PM            518 workflow.schema.ts
+-a----         1/15/2026   1:56 PM           8162 workflow.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/15/2026   1:56 PM                broker
+d-----         9/24/2025   1:28 PM                logger
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared\broker
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+d-----         1/15/2026   1:56 PM                annotations
+d-----         1/15/2026   1:56 PM                definitions
+d-----         1/15/2026   1:58 PM                services
+-a----         1/15/2026   1:56 PM            347 broker.module.ts
+-a----          7/2/2025   1:03 PM            758 README.md
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared\broker\annotations
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         1/15/2026   1:56 PM            578 broker.annotation.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared\broker\definitions
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         1/15/2026   1:56 PM            761 broker.definition.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared\broker\services
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         1/15/2026   1:58 PM            956 broker-consumer.service.ts
+-a----         1/15/2026   1:56 PM           4899 broker.service.ts
+    Directory: C:\Users\flavi\workspace\consultance\memoco\project\3053\waves-2
+    \3053-waves-worker\src\shared\logger
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a----         5/30/2025  11:30 AM           1196 better-stack.logger.ts

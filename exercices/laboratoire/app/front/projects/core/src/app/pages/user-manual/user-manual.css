@@ -1,0 +1,87 @@
+.manual-container {
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+h3 {
+  color: var(--p-primary-color);
+  border-bottom: 2px solid var(--p-primary-color);
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.image-placeholder {
+  margin-top: 20px;
+  border: 1px dashed #ccc;
+  padding: 10px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+}
+
+.plugin-doc {
+  background-color: var(--p-surface-50);
+  border-left: 4px solid var(--p-primary-color);
+  padding: 15px;
+  margin-top: 15px;
+  border-radius: 0 4px 4px 0;
+}
+
+.plugin-doc h5 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--p-primary-color);
+}
+
+ol {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+ol li {
+  margin-bottom: 8px;
+}
+
+pre {
+  background-color: #2d2d2d;
+  color: #f8f8f2;
+  padding: 10px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 10px 0;
+}
+
+code {
+  font-family: 'Courier New', Courier, monospace;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+
+:host ::ng-deep .p-scrollpanel-bar {
+  background-color: var(--p-primary-500);
+}

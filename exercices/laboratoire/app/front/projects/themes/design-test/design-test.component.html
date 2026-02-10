@@ -1,0 +1,44 @@
+<div class="h-full w-full grid sm:grid-rows md:grid-cols-[15%_1fr]">
+  <p-drawer
+    [(visible)]="drawerVisible"
+    [modal]="true"
+    position="left"
+    class="md:hidden m-2 absolute"
+    [baseZIndex]="10000"
+  >
+    <core-menu
+      [orientation]="orientation()"
+      [items]="items()"
+      [title]="{ title: 'Theme', icon: '/favicon.ico', iconPosition: 'top' }"
+    ></core-menu>
+  </p-drawer>
+
+  <!-- Bouton hamburger visible GSM -->
+  <div class="md:hidden absolute m-4">
+    <button class="p-2 absolute z-50" (click)="drawerVisible = true">
+      <i class="pi pi-bars text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Menu normal visible pc -->
+  <nav class="m-2 hidden md:block">
+    <core-menu
+      [orientation]="orientation()"
+      [items]="items()"
+      [title]="{ title: 'Theme', icon: '/favicon.ico', iconPosition: 'top' }"
+    ></core-menu>
+  </nav>
+  <section class="grid grid-rows-[58px_0] my-2 mr-2 mx-2 md:ml-0">
+    <core-header>
+      <ng-template #end>
+        <div class="flex flex-row gap-2">
+          <i
+            class="pi pi-sign-out text-1xl hover:cursor-pointer m-2"
+            (click)="onSignOut()"
+          ></i>
+        </div>
+      </ng-template>
+    </core-header>
+    <router-outlet/>
+  </section>
+</div>

@@ -1,0 +1,9 @@
+{
+  "security": {
+    "sign-in": {
+      "email": "E-mailadres",
+      "password": "Wachtwoord",
+      "submit": "Inloggen"
+    }
+  }
+}

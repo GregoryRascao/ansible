@@ -1,0 +1,62 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: present
+  become: yes
+
+- name: Frontend folder stat
+  stat:
+    path: /var/www/api
+  register: file_stats
+
+- name: Remove old repository
+  command: rm -R /var/www/frontend
+  become: yes
+  when:
+    - file_stats.stat.pw_name == 'www-data'
+    - file_stats.stat.gr_name == 'www-data'
+
+- name: Clone Angular repository
+  git:
+    repo: "{{ frontend_repo_url }}"
+    dest: /var/www/frontend
+    version: main
+    force: yes
+
+- name: Change repository owner
+  file:
+    path: /var/www/fronted
+    owner: www-data
+    group: www-data
+    mode: '0755'
+    recurse: yes
+
+- name: Install dependencies
+  npm:
+    path: /var/www/frontend
+  become: yes
+
+- name: Build Angular app
+  command: npm run build -- --configuration=production
+  args:
+    chdir: /var/www/frontend
+  become: yes
+
+- name: Copy Nginx configuration from template
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/myapp
+  become: yes
+
+- name: Remove default site
+  command: rm /etc/nginx/sites-enabled/default
+  become: yes
+
+- name: Enable Nginx site
+  file:
+    src: /etc/nginx/sites-available/myapp
+    dest: /etc/nginx/sites-enabled/myapp
+    state: link
+  become: yes
+  notify: Restart Nginx

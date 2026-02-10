@@ -1,0 +1,19 @@
+---
+- name: Deploy Full Stack Application (NestJS, Angular)
+  hosts: vms
+  become: yes
+
+  roles:
+    - role: common
+    - role: nestjs
+    - role: angular
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+
+    - name: Restart NestJS
+      command:
+        cmd: pm2 restart nest-api

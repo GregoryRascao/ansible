@@ -1,0 +1,7 @@
+<workflow-list [workflows]="workflows()!">
+  <ng-template #actions let-item>
+    <div class="flex flex-row justify-center gap-1 mx-0">
+      <p-button label="Restore" icon="pi pi-refresh" severity="info" (onClick)="restoreWorkflow(item)"/>
+    </div>
+  </ng-template>
+</workflow-list>

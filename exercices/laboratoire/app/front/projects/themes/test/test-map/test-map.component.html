@@ -1,0 +1,28 @@
+<section class="flex flex-col gap-2">
+  <p-card [style.border]="'var(--p-card-border)'" class="rounded-md">
+    <article>
+      <h1>Operation</h1>
+      <div class="flex flex-row gap-3">
+        <p-button label="Ajouter un marker standart" (onClick)="addMarker()" />
+        <p-button
+          label="Ajouter un marker avec icon "
+          (onClick)="addMarkerWithIcon()"
+        />
+        <p-button
+          label="Ajouter une marker avec icon et popup"
+          (onClick)="addMarkerWithIconAndPopup()"
+        />
+        <p-button label="Zoom vers une localisation" (onClick)="zoomTo(true)" />
+        <p-button
+          label="Zoom vers une localisation sans animation"
+          (onClick)="zoomTo(false)"
+        />
+        <p-button label="Clean map" (onClick)="cleanMap()" />
+      </div>
+    </article>
+    <article>
+      <h1>Apercu</h1>
+      <m-map [dt]="{ height: 'calc(100vh - 300px)' }" />
+    </article>
+  </p-card>
+</section>
