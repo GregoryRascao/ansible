@@ -1,80 +1,106 @@
 # Ansible - Cours, Exercices et Corrections
 
-Ce dépôt a pour objectif de centraliser les supports de cours, les exercices pratiques et les corrections liés à l'outil Ansible.
+Ce dépôt contient un ensemble de ressources pédagogiques autour d'Ansible, organisées pour faciliter l'apprentissage progressif de cet outil d'automatisation.
 
-Il s'agit d'un projet pédagogique destiné à apprendre les bases et les usages avancés d'Ansible pour automatiser la configuration, le déploiement et la gestion de systèmes.
+Il regroupe :
 
-## À quoi sert ce projet ?
+- des supports de cours au format PDF ;
+- des exercices pratiques ;
+- des corrections associées ;
+- un environnement de travail structuré pour la mise en application des notions vues.
 
-Le projet sert à :
+## Objectif du projet
 
-- découvrir les fondamentaux d'Ansible ;
-- comprendre le rôle des playbooks et du langage YAML ;
-- apprendre à structurer un code Ansible avec les rôles et les templates ;
-- pratiquer des cas concrets de configuration d'infrastructures ;
-- explorer des notions avancées comme la sécurité, l'inventaire dynamique et l'intégration CI/CD ;
-- travailler sur des exercices et comparer ses solutions avec les corrections fournies.
+L'objectif de ce projet est de permettre à un apprenant de :
 
-## Contenu du dépôt
+- comprendre les bases d'Ansible ;
+- maîtriser le concept de playbook et le langage YAML ;
+- structurer son code avec les rôles et les templates ;
+- automatiser des tâches de configuration et de déploiement ;
+- se familiariser avec des notions plus avancées comme la sécurité, l'inventaire dynamique et l'intégration CI/CD.
+
+Ce dépôt est avant tout un support de formation destiné à la mise en pratique des compétences Ansible dans un cadre pédagogique.
+
+## Structure du dépôt
+
+```text
+ansible/
+├── cours/                     # Supports de cours (PDF + laboratoire)
+│   ├── 1_Ansible _ Introduction et Fondamentaux.pdf
+│   ├── 2_Les Playbooks Ansible et le langage YAML.pdf
+│   ├── 3_Structurer son code Ansible _ Rôles et Templates.pdf
+│   ├── 4_Ansible Avancé _ Sécurité, Inventaire Dynamique et CI_CD.pdf
+│   └── Laboratoire_cours.md
+├── exercices/                 # Exercices pratiques
+│   ├── ansible_project/
+│   ├── ansible-angular/
+│   ├── laboratoire/
+│   └── .vagrant/
+├── correction/                # Corrections et solutions des exercices
+│   ├── exo1&2/
+│   └── exo3/
+└── README.md
+```
+
+## Les contenus disponibles
 
 ### Cours
-Le dossier `cours/` contient les supports de formation sous forme de PDF :
+Le dossier `cours/` contient les fichiers de cours permettant d'acquérir les connaissances nécessaires à la bonne compréhension d'Ansible :
 
-- Introduction et fondamentaux d'Ansible
-- Les playbooks Ansible et le langage YAML
-- Structurer son code Ansible : rôles et templates
-- Ansible avancé : sécurité, inventaire dynamique et CI/CD
-- Document de laboratoire associé (`Laboratoire_cours.md`)
+- introduction aux concepts fondamentaux ;
+- utilisation des playbooks ;
+- écriture YAML ;
+- organisation du code ;
+- rôle des templates ;
+- sécurité et automatisation avancée ;
+- intégration dans un workflow CI/CD.
 
 ### Exercices
-Le dossier `exercices/` regroupe les travaux pratiques et projets d'entraînement :
+Le dossier `exercices/` met en pratique les notions vues en cours. Il comprend plusieurs cas d'usage et projets concrets visant à développer les compétences sur :
 
-- `ansible_project/`
-- `ansible-angular/`
-- `laboratoire/`
-- environnement Vagrant associé (`.vagrant/`)
-
-Ces exercices permettent de mettre en application les concepts vus dans les cours.
+- la rédaction de playbooks ;
+- la gestion de machines distantes ;
+- la configuration de services ;
+- les bonnes pratiques de structure de projet.
 
 ### Corrections
-Le dossier `correction/` contient les solutions associées aux exercices, notamment :
+Le dossier `correction/` permet de comparer ses solutions aux réponses attendues, et d'analyser les bonnes pratiques de mise en œuvre.
 
-- `exo1&2/`
-- `exo3/`
+## Compétences couvertes
 
-Cela permet de valider les résultats et d'étudier les bonnes pratiques de mise en œuvre.
+Ce projet aborde les sujets suivants :
 
-## Objectif pédagogique
-
-Le dépôt est surtout conçu pour un apprentissage progressif :
-
-1. lire les cours ;
-2. réaliser les exercices ;
-3. vérifier les corrections ;
-4. réutiliser les bonnes pratiques dans des environnements réels.
-
-## Exemple de thématiques couvertes
-
-- installation et utilisation d'Ansible ;
-- création de fichiers d'inventaire ;
+- installation et configuration d'Ansible ;
+- création et gestion d'inventaires ;
 - écriture de playbooks YAML ;
-- gestion de tâches, variables et modules ;
-- automatisation de déploiements ;
-- organisation du code via des rôles ;
-- sécurisation des configurations ;
-- intégration dans des pipelines CI/CD.
+- utilisation de variables, conditions et boucles ;
+- gestion des rôles et des modules ;
+- déploiement automatisé ;
+- structuration d'un projet Ansible ;
+- sécurité des configurations ;
+- utilisation de l'inventaire dynamique ;
+- intégration dans une chaîne CI/CD.
 
 ## Utilisation recommandée
 
-- ouvrir les PDF du dossier `cours/` pour suivre le cours ;
-- utiliser les dossiers `exercices/` pour pratiquer ;
-- comparer les résultats avec les fichiers dans `correction/` ;
-- adapter les exemples à vos besoins et à votre environnement de test.
+1. Commencer par lire les PDF dans le dossier `cours/`.
+2. Travailler sur les exercices du dossier `exercices/`.
+3. Vérifier les solutions dans `correction/`.
+4. Réutiliser les exemples et les bonnes pratiques dans vos propres projets.
+
+## Public cible
+
+Ce dépôt s'adresse principalement :
+
+- aux étudiants en informatique ;
+- aux personnes souhaitant apprendre Ansible ;
+- aux profils DevOps ou système qui souhaitent automatiser leurs tâches ;
+- à toute personne souhaitant se former à l'automatisation de serveurs et de déploiements.
 
 ## Note
 
-Ce dépôt est avant tout un support de formation et de mise en pratique. Il ne s'agit pas d'un projet applicatif métier classique, mais d'un espace d'apprentissage autour d'Ansible.
+Ce projet est avant tout un support d'apprentissage pratique. Il ne s'agit pas d'un projet applicatif métier classique, mais d'un espace de formation visant à acquérir des compétences concrètes sur Ansible.
 
 ---
 
-Ce README a été ajouté pour donner une vue d'ensemble claire du projet et son usage pédagogique.
+Projet pédagogique Ansible - cours, exercices et corrections.
